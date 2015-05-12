@@ -16,6 +16,10 @@
         <name>ApexPage</name>
     </types>
     <types>
+        <members>AddressAutocompleteGoogleKey__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
         <members>Account.Address_Autocomplete</members>
         <members>Contact.Address_Autocomplete</members>
         <members>Lead.Address_Autocomplete</members>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <customSettingsVisibility>Protected</customSettingsVisibility>
+    <description>Your Google API Key, used to authenticate with Google server.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Key__c</fullName>
+        <description>The Google API key. Can be obtained from:
+https://console.developers.google.com/</description>
+        <externalId>false</externalId>
+        <label>Key</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Address Autocomplete Google Key</label>
+</CustomObject>

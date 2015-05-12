@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>32.0</apiVersion>
+    <description>Address autocomplete component for populating addresses for objects in Salesforce. Uses the Google Places API to auto-complete.</description>
+    <label>AddressAutocomplete</label>
+</ApexComponent>

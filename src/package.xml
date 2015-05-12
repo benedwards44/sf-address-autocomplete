@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>AddressAutocompleteController</members>
+        <members>AddressAutocompleteControllerTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>AddressAutocomplete</members>
+        <name>ApexComponent</name>
+    </types>
+    <types>
+        <members>AddressAutocompleteAccount</members>
+        <members>AddressAutocompleteContact</members>
+        <members>AddressAutocompleteLead</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>Account.Address_Autocomplete</members>
+        <members>Contact.Address_Autocomplete</members>
+        <members>Lead.Address_Autocomplete</members>
+        <name>WebLink</name>
+    </types>
+    <version>32.0</version>
+</Package>

@@ -1,0 +1,174 @@
+<apex:component controller="AddressAutocompleteController" allowDml="true">
+
+	<!-- Attributes to be passed through from VisualForce pages -->
+	<apex:attribute type="Id" name="objectId" required="true" assignTo="{!recordId}" description="The sObject record to validate the address for" />
+	<apex:attribute type="String" name="objectName" required="true" assignTo="{!objName}" description="The API name of the sObject" />
+	<apex:attribute type="String" name="addressOnePrefix" required="true" assignTo="{!addOnePrefix}" description="The API prefix of the first address. Eg. Billing or Shipping" />
+	<apex:attribute type="String" name="addressTwoPrefix" required="false" assignTo="{!addTwoPrefix}" description="The API prefix for the second address. Eg. Shipping, Mailing, Other. This can be left blank if only one address is used." />
+
+	<!-- Bootstrap CSS for sexy input fields -->
+	<apex:styleSheet value="{!URLFOR($Resource.AddressAutocomplete, 'bootstrap-3-3-4.min.css')}" />
+
+	<!-- Google Places API -->
+	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key={!$Setup.AddressAutocompleteGoogleKey__c.Key__c}"></script>
+
+	<!-- jQuery for easy element selection and value passing -->
+	<script src="{!URLFOR($Resource.AddressAutocomplete, 'jquery-1.11.3.min.js')}"></script>
+
+	<!-- Script to initalise Google scripts, execute callout and populate results to fields -->
+	<script>
+		// This example displays an address form, using the autocomplete feature
+		// of the Google Places API to help users fill in the information.
+		var autoCompleteOne;	
+		var autoCompleteTwo;
+
+		function initialize() {
+
+			// Create the autocomplete object, restricting the search
+			// to geographical location types.
+			autoCompleteOne = new google.maps.places.Autocomplete(
+			    (document.getElementById('autocomplete_one')),
+			    { types: ['geocode'] });
+
+			// When the user selects an address from the dropdown,
+			// populate the address fields in the form.
+			google.maps.event.addListener(autoCompleteOne, 'place_changed', function() {
+				fillInAddress('one');
+			});
+
+			// Only if AddressTwo is provided
+			if ('{!addressTwoPrefix}' != '') {
+				
+				// Create another autocomplete object, for second input
+				autoCompleteTwo = new google.maps.places.Autocomplete(
+			    	(document.getElementById('autocomplete_two')),
+			    	{ types: ['geocode'] });
+
+				// Create a second listener for changes
+				google.maps.event.addListener(autoCompleteTwo, 'place_changed', function() {
+					fillInAddress('two');
+				});
+
+			}
+
+		}
+
+		function fillInAddress(addressNo) {
+
+			var place;
+
+			// Get the place details from the autocomplete object.
+			if (addressNo == 'one') {
+				place = autoCompleteOne.getPlace();
+			} 
+			else {
+				place = autoCompleteTwo.getPlace();
+			}
+
+			// Variables to extract from response
+			var street = '';
+			var city = '';
+			var state = '';
+			var postcode = '';
+			var country = '';
+ 
+			// Get each component of the address from the place details
+			// and fill the corresponding field on the form.
+			for (var i = 0; i < place.address_components.length; i++) {
+
+				// The Google address type
+				var addressType = place.address_components[i].types[0];
+
+				// Set address variables
+				if (addressType == 'street_number') {
+					street = place.address_components[i]['long_name'];
+				}
+				else if (addressType == 'route') {
+					street += ' ' + place.address_components[i]['long_name'];
+				}
+				else if (addressType == 'locality') {
+					city = place.address_components[i]['long_name'];
+				}
+				else if (addressType == 'administrative_area_level_1') {
+					state = place.address_components[i]['long_name'];
+				}
+				else if (addressType == 'administrative_area_level_2' && state == '') {
+					state = place.address_components[i]['long_name'];
+				}
+				else if (addressType == 'country') {
+					country = place.address_components[i]['long_name'];
+				}
+				else if (addressType == 'postal_code') {
+					postcode = place.address_components[i]['long_name'];
+				}
+
+			}
+
+			// Pass values to input fields
+  			$('.' + addressNo + 'Street').val(street);
+  			$('.' + addressNo + 'City').val(city);
+  			$('.' + addressNo + 'State').val(state);
+  			$('.' + addressNo + 'PostalCode').val(postcode);
+  			$('.' + addressNo + 'Country').val(country);
+
+		}
+
+    </script>
+
+    <apex:sectionHeader title="{!obj['Name']}" subtitle="Validate Address" />
+
+	<apex:form id="form">
+
+		<apex:pageBlock id="block">
+
+			<apex:pageMessages />
+
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Save" action="{!save}" />
+				<apex:commandButton value="Cancel" action="{!cancel}" />
+			</apex:pageBlockButtons>
+
+			<apex:outputPanel styleClass="bs">
+
+				<apex:pageBlockSection columns="1" title="{!addressOnePrefix} Address">
+
+					<apex:pageBlockSectionItem >
+						<apex:outputLabel value="  " />
+						<input type="text" class="form-control" id="autocomplete_one" placeholder="Start typing address..." />
+					</apex:pageBlockSectionItem>
+
+					<apex:inputField value="{!obj[addressOnePrefix + 'Street']}" styleClass="form-control oneStreet" style="height:55px;" />
+					<apex:inputField value="{!obj[addressOnePrefix + 'City']}" styleClass="form-control oneCity" />
+					<apex:inputField value="{!obj[addressOnePrefix + 'State']}" styleClass="form-control oneState" />
+					<apex:inputField value="{!obj[addressOnePrefix + 'PostalCode']}" styleClass="form-control onePostalCode" />
+					<apex:inputField value="{!obj[addressOnePrefix + 'Country']}" styleClass="form-control oneCountry" />
+
+				</apex:pageBlockSection>
+
+				<apex:pageBlockSection columns="1" title="{!addressTwoPrefix} Address" rendered="{!AND(addressTwoPrefix != null, addressTwoPrefix != '')}">
+
+					<apex:pageBlockSectionItem >
+						<apex:outputLabel value="  " />
+						<input type="text" class="form-control" id="autocomplete_two" placeholder="Start typing address..." />
+					</apex:pageBlockSectionItem>
+
+					<apex:inputField value="{!obj[addressTwoPrefix + 'Street']}" styleClass="form-control twoStreet" style="height:55px;" />
+					<apex:inputField value="{!obj[addressTwoPrefix + 'City']}" styleClass="form-control twoCity" />
+					<apex:inputField value="{!obj[addressTwoPrefix + 'State']}" styleClass="form-control twoState" />
+					<apex:inputField value="{!obj[addressTwoPrefix + 'PostalCode']}" styleClass="form-control twoPostalCode" />
+					<apex:inputField value="{!obj[addressTwoPrefix + 'Country']}" styleClass="form-control twoCountry" />
+
+				</apex:pageBlockSection>
+
+			</apex:outputPanel>
+
+		</apex:pageBlock>
+
+	</apex:form>
+
+	<!-- Run script after everything above has loaded -->
+	<script>
+		initialize();
+	</script>
+
+</apex:component>

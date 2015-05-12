@@ -1,0 +1,7 @@
+<apex:page standardController="Lead" title="{!Lead.Name} - Validate Address">
+
+	<c:AddressAutocomplete objectId="{!Lead.Id}" 
+		objectName="Lead" 
+		addressOnePrefix="" />
+
+</apex:page>

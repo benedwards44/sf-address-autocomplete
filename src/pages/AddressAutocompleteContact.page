@@ -1,0 +1,8 @@
+<apex:page standardController="Contact" title="{!Contact.Name} - Validate Address">
+
+	<c:AddressAutocomplete objectId="{!Contact.Id}" 
+		objectName="Contact" 
+		addressOnePrefix="Mailing" 
+		addressTwoPrefix="Other" />
+
+</apex:page>

@@ -15,5 +15,5 @@ https://developers.google.com/maps/terms
 ## Installation
 
 1. Deploy this package to a Salesforce environment
-2. Sign up for a Google Account
+2. Sign up for a Google Account and obtain your API key (https://code.google.com/apis/console)
 3. Put your Google API key in the custom settings

@@ -12,6 +12,9 @@ To add additional objects, simply copy the existing VisualForce pages, set the c
 If looking to implement this package, be sure to read the Terms of Service for the Google Places API:
 https://developers.google.com/maps/terms
 
+And the usage limits:
+https://developers.google.com/places/webservice/usage
+
 ## Installation
 
 1. Deploy this package to a Salesforce environment

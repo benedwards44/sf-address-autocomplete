@@ -27,6 +27,14 @@ public with sharing class AddressAutocompleteController {
 		}
 		catch (Exception ex) {
 
+			// Add error to page messages if none already exist. Some would exist if page validation fails, so no need to enter twice
+			if (!ApexPages.hasMessages()) {
+
+				ApexPages.addMessages(ex);
+			}
+
+			system.debug('### Error saving object: ' + ex);
+
 			// Return null. Error message should be returned via pageMessages on page
 			return null;
 		}	

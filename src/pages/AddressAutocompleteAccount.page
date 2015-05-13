@@ -2,7 +2,18 @@
 
 	<c:AddressAutocomplete objectId="{!Account.Id}" 
 		objectName="Account" 
-		addressOnePrefix="Billing" 
-		addressTwoPrefix="Shipping" />
+		addressOneName="Billing"
+		oneStreet="BillingStreet"
+		oneCity="BillingCity"
+		oneState="BillingState"
+		onePostalCode="BillingPostalCode"
+		oneCountry="BillingCountry"
+		includeSecondAddress="true"
+		addressTwoName="Shipping"
+		twoStreet="ShippingStreet"
+		twoCity="ShippingCity"
+		twoState="ShippingState"
+		twoPostalCode="ShippingPostalCode"
+		twoCountry="ShippingCountry" />
 
 </apex:page>

@@ -12,8 +12,24 @@ public with sharing class AddressAutocompleteController {
 	// Variables passed through from Component
 	public Id recordId {get;set;}
 	public String objName {get;set;}
-	public String addOnePrefix {get;set;}
-	public String addTwoPrefix {get;set;}
+
+	// Address one details
+	public String streetOne {get;set;}
+	public String cityOne {get;set;}
+	public String stateOne {get;set;}
+	public String postalcodeOne {get;set;}
+	public String countryOne {get;set;}
+
+	// Whether to include 2nd address
+	public Boolean secondAddress {get;set;}
+
+	// ADdress two details
+	public String streetTwo {get;set;}
+	public String cityTwo {get;set;}
+	public String stateTwo {get;set;}
+	public String postalcodeTwo {get;set;}
+	public String countryTwo {get;set;}
+
 	
 	// CONSTRUCTOR
 	public AddressAutocompleteController() {}
@@ -54,20 +70,21 @@ public with sharing class AddressAutocompleteController {
 
 				// Build query for address fields
 				String objectQuery = 'Select Name,';
-				objectQuery += addOnePrefix + 'Street,';
-				objectQuery += addOnePrefix + 'City,';
-				objectQuery += addOnePrefix + 'State,';
-				objectQuery += addOnePrefix + 'PostalCode,';
-				objectQuery += addOnePrefix + 'Country';
+				objectQuery += String.isNotBlank(streetOne) ? streetOne + ',' : '';
+				objectQuery += String.isNotBlank(cityOne) ? cityOne + ',' : '';
+				objectQuery += String.isNotBlank(stateOne) ? stateOne + ',' : '';
+				objectQuery += String.isNotBlank(postalcodeOne) ? postalcodeOne + ',' : '';
+				objectQuery += String.isNotBlank(countryOne) ? countryOne : '';
 
 				// If there is a 2nd address, add fields to query
-				if (String.isNotBlank(addTwoPrefix)) {
+				if (secondAddress) {
 
-					objectQuery += ',' + addTwoPrefix + 'Street,';
-					objectQuery += addTwoPrefix + 'City,';
-					objectQuery += addTwoPrefix + 'State,';
-					objectQuery += addTwoPrefix + 'PostalCode,';
-					objectQuery += addTwoPrefix + 'Country';
+					objectQuery += ',';
+					objectQuery += String.isNotBlank(streetTwo) ? streetTwo + ',' : '';
+					objectQuery += String.isNotBlank(cityTwo) ? cityTwo + ',' : '';
+					objectQuery += String.isNotBlank(stateTwo) ? stateTwo + ',' : '';
+					objectQuery += String.isNotBlank(postalCodeTwo) ? postalCodeTwo + ',' : '';
+					objectQuery += String.isNotBlank(countryTwo) ? countryTwo : '';
 
 				}
 

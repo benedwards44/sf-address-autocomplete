@@ -3,8 +3,26 @@
 	<!-- Attributes to be passed through from VisualForce pages -->
 	<apex:attribute type="Id" name="objectId" required="true" assignTo="{!recordId}" description="The sObject record to validate the address for" />
 	<apex:attribute type="String" name="objectName" required="true" assignTo="{!objName}" description="The API name of the sObject" />
-	<apex:attribute type="String" name="addressOnePrefix" required="true" assignTo="{!addOnePrefix}" description="The API prefix of the first address. Eg. Billing or Shipping" />
-	<apex:attribute type="String" name="addressTwoPrefix" required="false" assignTo="{!addTwoPrefix}" description="The API prefix for the second address. Eg. Shipping, Mailing, Other. This can be left blank if only one address is used." />
+
+	<!-- Address One Fields -->
+	<apex:attribute type="String" name="addressOneName" required="true" description="The label name of the first address." />
+	<apex:attribute type="String" name="oneStreet" required="true" assignTo="{!streetOne}" description="The API name of the first street field." />
+	<apex:attribute type="String" name="oneCity" required="true" assignTo="{!cityOne}" description="The API name of the first city field." />
+	<apex:attribute type="String" name="oneState" required="true" assignTo="{!stateOne}" description="The API name of the first state field." />
+	<apex:attribute type="String" name="onePostalCode" required="true" assignTo="{!postalcodeOne}" description="The API name of the first postal code field." />
+	<apex:attribute type="String" name="oneCountry" required="true" assignTo="{!countryOne}" description="The API name of the first country." />
+
+	<!-- Boolean to specifiy whether a second address is included -->
+	<apex:attribute type="Boolean" name="includeSecondAddress" required="true" assignTo="{!secondAddress}" description="Specifiy whether you would like a second address included component." />
+
+	<!-- Address Two Fields -->
+	<apex:attribute type="String" name="addressTwoName" required="false" description="The label name of the second address." />
+	<apex:attribute type="String" name="twoStreet" required="false" assignTo="{!streetTwo}" description="The API name of the second street field." />
+	<apex:attribute type="String" name="twoCity" required="false" assignTo="{!cityTwo}" description="The API name of the second city field." />
+	<apex:attribute type="String" name="twoState" required="false" assignTo="{!stateTwo}" description="The API name of the second state field." />
+	<apex:attribute type="String" name="twoPostalCode" required="false" assignTo="{!postalcodeTwo}" description="The API name of the second postal code field." />
+	<apex:attribute type="String" name="twoCountry" required="false" assignTo="{!countryTwo}" description="The API name of the second country." />
+
 
 	<!-- Bootstrap CSS for sexy input fields -->
 	<apex:styleSheet value="{!URLFOR($Resource.AddressAutocomplete, 'bootstrap-3-3-4.min.css')}" />
@@ -37,7 +55,7 @@
 			});
 
 			// Only if AddressTwo is provided
-			if ('{!addressTwoPrefix}' != '') {
+			if ({!includeSecondAddress} == true) {
 				
 				// Create another autocomplete object, for second input
 				autoCompleteTwo = new google.maps.places.Autocomplete(
@@ -130,33 +148,33 @@
 
 			<apex:outputPanel styleClass="bs">
 
-				<apex:pageBlockSection columns="1" title="{!addressOnePrefix} Address">
+				<apex:pageBlockSection columns="1" title="{!addressOneName} Address">
 
 					<apex:pageBlockSectionItem >
 						<apex:outputLabel value="  " />
 						<input type="text" class="form-control" id="autocomplete_one" placeholder="Start typing address..." />
 					</apex:pageBlockSectionItem>
 
-					<apex:inputField value="{!obj[addressOnePrefix + 'Street']}" styleClass="form-control oneStreet" style="height:55px;" />
-					<apex:inputField value="{!obj[addressOnePrefix + 'City']}" styleClass="form-control oneCity" />
-					<apex:inputField value="{!obj[addressOnePrefix + 'State']}" styleClass="form-control oneState" />
-					<apex:inputField value="{!obj[addressOnePrefix + 'PostalCode']}" styleClass="form-control onePostalCode" />
-					<apex:inputField value="{!obj[addressOnePrefix + 'Country']}" styleClass="form-control oneCountry" />
+					<apex:inputField value="{!obj[oneStreet]}" styleClass="form-control oneStreet" style="height:55px;" />
+					<apex:inputField value="{!obj[oneCity]}" styleClass="form-control oneCity" />
+					<apex:inputField value="{!obj[oneState]}" styleClass="form-control oneState" />
+					<apex:inputField value="{!obj[onePostalCode]}" styleClass="form-control onePostalCode" />
+					<apex:inputField value="{!obj[oneCountry]}" styleClass="form-control oneCountry" />
 
 				</apex:pageBlockSection>
 
-				<apex:pageBlockSection columns="1" title="{!addressTwoPrefix} Address" rendered="{!AND(addressTwoPrefix != null, addressTwoPrefix != '')}">
+				<apex:pageBlockSection columns="1" title="{!addressTwoName} Address" rendered="{!includeSecondAddress}">
 
 					<apex:pageBlockSectionItem >
 						<apex:outputLabel value="  " />
 						<input type="text" class="form-control" id="autocomplete_two" placeholder="Start typing address..." />
 					</apex:pageBlockSectionItem>
 
-					<apex:inputField value="{!obj[addressTwoPrefix + 'Street']}" styleClass="form-control twoStreet" style="height:55px;" />
-					<apex:inputField value="{!obj[addressTwoPrefix + 'City']}" styleClass="form-control twoCity" />
-					<apex:inputField value="{!obj[addressTwoPrefix + 'State']}" styleClass="form-control twoState" />
-					<apex:inputField value="{!obj[addressTwoPrefix + 'PostalCode']}" styleClass="form-control twoPostalCode" />
-					<apex:inputField value="{!obj[addressTwoPrefix + 'Country']}" styleClass="form-control twoCountry" />
+					<apex:inputField value="{!obj[twoStreet]}" styleClass="form-control twoStreet" style="height:55px;" />
+					<apex:inputField value="{!obj[twoCity]}" styleClass="form-control twoCity" />
+					<apex:inputField value="{!obj[twoState]}" styleClass="form-control twoState" />
+					<apex:inputField value="{!obj[twoPostalCode]}" styleClass="form-control twoPostalCode" />
+					<apex:inputField value="{!obj[twoCountry]}" styleClass="form-control twoCountry" />
 
 				</apex:pageBlockSection>
 

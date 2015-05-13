@@ -2,6 +2,12 @@
 
 	<c:AddressAutocomplete objectId="{!Lead.Id}" 
 		objectName="Lead" 
-		addressOnePrefix="" />
+		addressOneName=""
+		oneStreet="Street"
+		oneCity="City"
+		oneState="State"
+		onePostalCode="PostalCode"
+		oneCountry="Country"
+		includeSecondAddress="false" />
 
 </apex:page>

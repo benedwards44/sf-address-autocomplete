@@ -28,6 +28,8 @@ https://developers.google.com/places/webservice/usage
 
 ## Limits
 
-This application is bound by the Google Terms of Service, and it's associated limits. These are also subject to change, so it's worth understanding this before implementing on any enterprise wide projects. Generally speaking, those Terms of Service that impact a Salesforce implementation are:
+This application is bound by the Google Terms of Service, and its associated limits. These are also subject to change, so it's worth understanding this before implementing on any enterprise wide projects. Generally speaking, those Terms of Service that impact a Salesforce implementation are:
 - 1,000 address validations per day, or 150k per day for a paid service (ask Google for pricing)
 - You cannot use the free service if "Your site is only accessible within your company or on your intranet.". This is ultimately the deal-breaker for use within Salesforce. Contact Google to get pricing for the Google Maps for Work API.
+
+The most recent quote I had from Google (May '15) was £7,700 GDP / $11,000 USD per year for 500k queries.

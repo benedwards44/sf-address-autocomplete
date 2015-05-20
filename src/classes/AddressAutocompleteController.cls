@@ -38,7 +38,10 @@ public with sharing class AddressAutocompleteController {
 	public PageReference save() {
 
 		try {
+			// Save the sObject record
 			update obj;
+			
+			// Return back to the standard record detail view
 			return new PageReference('/' + obj.Id);
 		}
 		catch (Exception ex) {
@@ -51,7 +54,7 @@ public with sharing class AddressAutocompleteController {
 
 			system.debug('### Error saving object: ' + ex);
 
-			// Return null. Error message should be returned via pageMessages on page
+			// Return null if an error exists - to display error on page.
 			return null;
 		}	
 	}
@@ -97,7 +100,6 @@ public with sharing class AddressAutocompleteController {
 			return obj;
 		}
 		set;
-
 	}
 		
 }

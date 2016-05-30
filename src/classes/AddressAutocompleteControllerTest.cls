@@ -27,10 +27,22 @@ public class AddressAutocompleteControllerTest {
 		insert testAccount;
 
 		// Set variables (normally passed through from component)
-		testCon.recordId = testAccount.Id;
-		testCon.objName = 'Account';
-		testCon.addOnePrefix = 'Billing';
-		testCon.addTwoPrefix = 'Shipping'; 
+		testCon.recordId 		= testAccount.Id;
+		testCon.objName 		= 'Account';
+
+		// Set 1st address details
+		testCon.streetOne 		= 'Street One';
+		testCon.cityOne 		= 'City One';
+		testCon.stateOne 		= 'State One';
+		testcon.postalcodeOne 	= 'Postcode One';
+		testCon.countryOne 		= 'Country One';
+
+		// Set 2nd address details
+		testCon.streetTwo 		= 'Street Two';
+		testCon.cityTwo 		= 'City Two';
+		testCon.stateTwo 		= 'State Two';
+		testcon.postalcodeTwo 	= 'Postcode Two';
+		testCon.countryTwo 		= 'Country Two';
 
 
 		// Assert obj is returned

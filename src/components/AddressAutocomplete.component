@@ -128,7 +128,6 @@
   			$('.' + addressNo + 'State').val(state);
   			$('.' + addressNo + 'PostalCode').val(postcode);
   			$('.' + addressNo + 'Country').val(country);
-
 		}
 
     </script>

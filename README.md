@@ -17,7 +17,12 @@ https://developers.google.com/places/webservice/usage
 
 ## Installation
 
-1. Deploy this package to a Salesforce environment ([Deploy to Org](https://githubsfdeploy.herokuapp.com/app/githubdeploy/benedwards44/sf-address-autocomplete))
+1. Deploy this package to a Salesforce environment 
+
+  - [Deploy to Org](https://githubsfdeploy.herokuapp.com/app/githubdeploy/benedwards44/sf-address-autocomplete)
+  - [Package Install for Production/Developer](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tb00000001XtV)
+  - [Package Install for Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tb00000001XtV)
+
 2. Sign up for a Google Account and obtain your API key (https://code.google.com/apis/console), and enable the Google Maps JavaScript API v3.
 3. Put your Google API key in the Address Autocomplete custom setting
 4. Add Address Autocomplete buttons to page layouts as required

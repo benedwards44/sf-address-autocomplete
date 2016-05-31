@@ -80,7 +80,7 @@ public with sharing class AddressAutocompleteController {
 				objectQuery += String.isNotBlank(countryOne) ? countryOne : '';
 
 				// If there is a 2nd address, add fields to query
-				if (secondAddress) {
+				if (secondAddress != null && secondAddress) {
 
 					objectQuery += ',';
 					objectQuery += String.isNotBlank(streetTwo) ? streetTwo + ',' : '';

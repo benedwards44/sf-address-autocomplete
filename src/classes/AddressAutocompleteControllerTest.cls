@@ -31,19 +31,21 @@ public class AddressAutocompleteControllerTest {
 		testCon.objName 		= 'Account';
 
 		// Set 1st address details
-		testCon.streetOne 		= 'Street One';
-		testCon.cityOne 		= 'City One';
-		testCon.stateOne 		= 'State One';
-		testcon.postalcodeOne 	= 'Postcode One';
-		testCon.countryOne 		= 'Country One';
+		testCon.streetOne 		= 'BillingStreet';
+		testCon.cityOne 		= 'BillingCity';
+		testCon.stateOne 		= 'BillingState';
+		testcon.postalcodeOne 	= 'BillingPostalCode';
+		testCon.countryOne 		= 'BillingCountry';
+
+		// Set Second Address to true.
+		testCon.secondAddress = true;
 
 		// Set 2nd address details
-		testCon.streetTwo 		= 'Street Two';
-		testCon.cityTwo 		= 'City Two';
-		testCon.stateTwo 		= 'State Two';
-		testcon.postalcodeTwo 	= 'Postcode Two';
-		testCon.countryTwo 		= 'Country Two';
-
+		testCon.streetTwo 		= 'ShippingStreet';
+		testCon.cityTwo 		= 'ShippingCity';
+		testCon.stateTwo 		= 'ShippingState';
+		testcon.postalcodeTwo 	= 'ShippingPostalCode';
+		testCon.countryTwo 		= 'ShippingCountry';
 
 		// Assert obj is returned
 		system.assertEquals(
